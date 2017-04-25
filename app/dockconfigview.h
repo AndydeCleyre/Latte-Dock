@@ -37,6 +37,12 @@ class Containment;
 class Types;
 }
 
+namespace KWayland {
+namespace Client {
+class PlasmaShellSurface;
+}
+}
+
 namespace Latte {
 
 class DockView;
@@ -67,6 +73,7 @@ protected:
     void showEvent(QShowEvent *ev) override;
     void hideEvent(QHideEvent *ev) override;
     void focusOutEvent(QFocusEvent *ev) override;
+    bool event(QEvent *e) override;
 
     void syncSlideEffect();
 
@@ -82,6 +89,8 @@ private:
     QPointer<DockView> m_dockView;
     QTimer m_screenSyncTimer;
     QList<QMetaObject::Connection> connections;
+
+    QPointer<KWayland::Client::PlasmaShellSurface> m_shellSurface;
 };
 
 }
